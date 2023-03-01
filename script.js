@@ -8,5 +8,5 @@ document.querySelector('form').addEventListener('submit', function(event) {
     var name = document.querySelector('#name').value;
     var email = document.querySelector('#email').value;
     var date = document.querySelector('#appointment-date').value;
-    var time = document.querySelector('#appointment-time').value
+    var time = document.querySelector('#appointment-time').value;
 })
