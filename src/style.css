@@ -1,0 +1,36 @@
+#calendar {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    padding: 10px;
+    border: 1px solid #7b0707;
+  }
+  
+  th {
+    background-color: #eea7d2;
+  }
+  
+  tr:nth-child(odd) td {
+    background-color: #e5d9e1;
+  }
+
+  tr:nth-child(even) td {
+    background-color: #d9c7d2;
+  }
+  
+  button {
+    margin: 0 10px;
+  }
+  
+  span {
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
