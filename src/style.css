@@ -29,6 +29,11 @@
   button {
     margin: 0 10px;
   }
+
+  h1.header {
+    text-align: center;
+    color: rgb(54, 4, 62)
+  }
   
   span {
     font-weight: bold;

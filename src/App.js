@@ -5,6 +5,8 @@ function Calendar() {
   const [selectedDate, setSelectedDate] = useState(new Date());
 
   const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+   'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   const hoursOfDay = Array.from(Array(9), (_, i) => i + 9);
   const halfHoursOfDay = hoursOfDay.flatMap(hour => [`${hour}:00`, `${hour}:30`]);
 
@@ -16,6 +18,9 @@ function Calendar() {
     setSelectedDate(new Date(selectedDate.getFullYear(), selectedDate.getMonth() + 1, 1));
   };
 
+  function monthName(monthNum) {
+    return months[monthNum - 1];
+  }
   const daysInMonth = () => {
     const month = selectedDate.getMonth();
     const year = selectedDate.getFullYear();
@@ -38,9 +43,9 @@ function Calendar() {
 
   return (
     <div className="calendar-container">
-      <h1>Week of {selectedDate.toLocaleDateString()}</h1>
-      <button onClick={previousMonth}>&lt;</button>
-      <button onClick={nextMonth}>&gt;</button>
+      <h1 class="header">Week of {monthName(selectedDate.getMonth())} {selectedDate.getDay()} {selectedDate.getFullYear()}</h1>
+      <button class = "header" onClick={previousMonth}>&lt;</button>
+      <button class = "header" onClick={nextMonth}>&gt;</button>
       <table className="calendar">
         <thead>
           <tr>
