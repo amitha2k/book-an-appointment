@@ -11,11 +11,12 @@
   
   th, td {
     padding: 10px;
-    border: 1px solid #7b0707;
+    border: 1px solid #bbabab;
+    text-align: center;
   }
   
   th {
-    background-color: #eea7d2;
+    background-color: #d5afed;
   }
   
   tr:nth-child(odd) td {
@@ -32,10 +33,14 @@
 
   h1.header {
     text-align: center;
-    color: rgb(54, 4, 62)
+    color: rgb(54, 4, 62);
+  }
+
+  .dates {
+    font-size: 1.6rem;
   }
   
-  span {
+  /* span {
     font-weight: bold;
     font-size: 1.2rem;
-  }
+  } */
