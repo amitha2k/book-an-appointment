@@ -10,7 +10,7 @@
   }
   
   th, td {
-    padding: 10px;
+    padding: 0px;
     border: 1px solid #bbabab;
     text-align: center;
   }
@@ -39,8 +39,31 @@
   .dates {
     font-size: 1.6rem;
   }
+
+  .slotButtons{
+    margin:0;
+    padding:0;
+    height:100%;
+    width:100%;
+    background-color: transparent;
+    cursor: pointer;
+    border: none;
+    color: transparent;
+    font-size: 2rem;
+  }
+
+  .slotButtons:hover{
+    background-color:rgb(113, 94, 116);
+  }
+
+  .inactive{
+    padding:0;
+    color:rgba(22, 25, 25, 0.217);
+  }
   
-  /* span {
-    font-weight: bold;
-    font-size: 1.2rem;
-  } */
+  .slotColumns{
+    width: 13%;
+  }
+  .times{
+    height: 40px;
+  }
