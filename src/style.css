@@ -1,5 +1,5 @@
-#calendar {
-    max-width: 600px;
+.calendar-container {
+    max-width: 100%;
     margin: 0 auto;
     text-align: center;
   }
@@ -53,7 +53,7 @@
   }
 
   .slotButtons:hover{
-    background-color:rgb(113, 94, 116);
+    background-color:rgb(167, 153, 169);
   }
 
   .inactive{
@@ -64,6 +64,12 @@
   .slotColumns{
     width: 13%;
   }
+  
   .times{
     height: 40px;
+  }
+
+  #prev, #next{
+    background-color: #d5afed;
+    width: 50px;
   }

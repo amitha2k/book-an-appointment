@@ -23,18 +23,20 @@ function Calendar() {
   //   }
   //   return timeSlots
   // const timeSlots = createTimeSlots();
-
+  const curr = new Date()
   //previousWeek and nextWeek mutate selectedDate to the date 7 days prior and later respectively.
   const previousWeek = () => {
-    setSelectedDate(new Date(selectedDate.getFullYear(), selectedDate.getMonth(), selectedDate.getDate() - 7));
-    document.getElementById("prev").disabled = true;
-    document.getElementById("next").removeAttribute('disabled');
+    if (selectedDate > curr){
+      setSelectedDate(new Date(selectedDate.getFullYear(), selectedDate.getMonth(), selectedDate.getDate() - 7));
+      document.getElementById("prev").disabled = true;
+      document.getElementById("next").disabled = false;
+    }
   };
 
   const nextWeek = () => {
     setSelectedDate(new Date(selectedDate.getFullYear(), selectedDate.getMonth(), selectedDate.getDate() + 7));
     document.getElementById("next").disabled = true;
-    document.getElementById("prev").removeAttribute('disabled');
+    document.getElementById("prev").disabled = false;
   };
 
   //monthName consumes a number from 0-11 and returns the corresponding month name.
@@ -67,11 +69,22 @@ function Calendar() {
     datesAndDays.push([datesOfWeek[i], daysOfWeek[i]]);
   }
 
+  // const dateTimeInfo = () => {
+  //   const d = ;
+  //   const t = ;
+  //   return [d,t];
+  // }
+  // const [dateOfApp, timeOfApp] = dateTimeInfo();
+
   return (
     <div className="calendar-container">
       <h1 className="header">Week of {currentWeekStart.getDate()} {monthName(currentWeekStart.getMonth())} {currentWeekStart.getFullYear()}</h1>
-      <button id="prev" onClick={previousWeek}>&lt;</button>
-      <button id= "next" onClick={nextWeek}>&gt;</button>
+      <span className="navigators">
+        <button id="prev" onClick={previousWeek}>&lt;</button>
+        <button id= "next" onClick={nextWeek}>&gt;</button>
+      </span>
+      <br></br>
+      <br></br>
       <table className="calendar">
         <thead>
           <tr>
@@ -91,7 +104,10 @@ function Calendar() {
                 currentDate.getDate()+13-currentDate.getDay())
                 if (date >= currentDate && date <= maxLimit) {
                   return <td key={`${date}-${hour}`}>
-                    <Link to="/get-an-appointment" target="_blank"><button className="slotButtons">.</button></Link>
+                    <Link to="/get-an-appointment" target="_blank">
+                      <button className="slotButtons">.
+                      </button>
+                    </Link>
                   </td>;
                 }
                 return <td key={`${date}-${hour}`} className="inactive">unavailable</td>;
