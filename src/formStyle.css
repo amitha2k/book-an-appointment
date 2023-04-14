@@ -1,3 +1,14 @@
-.form-container{
-    background-color: blue;
+.form-container {
+    background-color: rgb(184, 218, 233);
+    align-items: center;
+    max-width: 60%;
+    margin: 0 auto;
+}
+
+h1 {
+    text-align: center;
+}
+
+form {
+    padding: 10px;
 }

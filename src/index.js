@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
+import Calendar from './App';
 import Appointment from './Form';
 import reportWebVitals from './reportWebVitals';
+import ContextWrapper from './ContextWrapper';
 import {
   createBrowserRouter,
   RouterProvider,
@@ -13,7 +14,7 @@ import {
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <Calendar />,
   },
   {
     path: "get-an-appointment",
@@ -23,7 +24,9 @@ const router = createBrowserRouter([
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+  <ContextWrapper>
     <RouterProvider router={router} />
+  </ContextWrapper> 
     // <React.StrictMode>
     //   <App />
     // </React.StrictMode>

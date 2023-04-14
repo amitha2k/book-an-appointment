@@ -1,20 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
+import './formStyle.css';
+import { Link } from "react-router-dom";
+import App from './App';
+import GlobalContext from './GlobalContext';
 // import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 // import { useHistory } from "react-router-dom";
 
 function Appointment() {
+  const { dateVar, setDateVar, timeVar, setTimeVar } = useContext(GlobalContext);
   return (
-    <div>
+    <div className="form-container">
       <h1>Book an Appointment</h1>
       <form>
-        <label for="name">Name: </label>
-        <input type="text" name="name" id="name"></input>
+        <input type="text" name="name" id="name" placeholder="Name"></input>
         <br></br><br></br>
-        <label for="email">School e-mail: </label>
-        <input type="email" name="email" id="email"></input>
+        <input type="email" name="email" id="email" placeholder="School e-mail"></input>
         <br></br><br></br>
         <label for="course">Course: </label>
         <select name="course" id="course">
+          <option>Select a Course</option>
           <option>MATH 135</option>
           <option>MATH 136</option>
           <option>MATH 137</option>
@@ -36,10 +40,10 @@ function Appointment() {
         </select>
         <br></br><br></br>
         <label for="date">Date: </label>
-        <input type="date"></input>
+        <input type="text" placeholder={dateVar}></input>
         <br></br><br></br>
         <label for="time">Time: </label>
-        <input type="time"></input>
+        <input type="text" placeholder={timeVar}></input>
         <br></br><br></br>
         <label for="relatedFiles">Attach any relevant files here 
         (eg: assignments, coursenotes or screenshots of the same)</label>

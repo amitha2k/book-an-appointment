@@ -1,12 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import './style.css';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
+import GlobalContext from './GlobalContext';
 
 function Calendar() {
   //Today's Date:
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const { dateVar, setDateVar, timeVar, setTimeVar } = useContext(GlobalContext);
+
+  // useEffect(() => {
+  //   setSelectedDate(dateVar);
+  // }, [dateVar])
 
   //Constants for day, month and time names
   const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -44,6 +50,7 @@ function Calendar() {
     return months[monthNum];
   };
 
+
   const getDaysOfWeekForCurrentWeek = () => {
     const currentWeekStart = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), selectedDate.getDate()-selectedDate.getDay());
     const currentWeekEnd = new Date(currentWeekStart.getFullYear(), currentWeekStart.getMonth(), currentWeekStart.getDate() + 6);
@@ -69,9 +76,14 @@ function Calendar() {
     datesAndDays.push([datesOfWeek[i], daysOfWeek[i]]);
   }
 
+  const updateWhen = (d,h) => {
+    setDateVar(d.getDate());
+    setTimeVar(h);
+  }
+
   // const dateTimeInfo = () => {
-  //   const d = ;
-  //   const t = ;
+  //   const d = date;
+  //   const t = hour;
   //   return [d,t];
   // }
   // const [dateOfApp, timeOfApp] = dateTimeInfo();
@@ -79,6 +91,7 @@ function Calendar() {
   return (
     <div className="calendar-container">
       <h1 className="header">Week of {currentWeekStart.getDate()} {monthName(currentWeekStart.getMonth())} {currentWeekStart.getFullYear()}</h1>
+      {/* <h2>{dateVar} {timeVar}</h2> */}
       <span className="navigators">
         <button id="prev" onClick={previousWeek}>&lt;</button>
         <button id= "next" onClick={nextWeek}>&gt;</button>
@@ -104,9 +117,8 @@ function Calendar() {
                 currentDate.getDate()+13-currentDate.getDay())
                 if (date >= currentDate && date <= maxLimit) {
                   return <td key={`${date}-${hour}`}>
-                    <Link to="/get-an-appointment" target="_blank">
-                      <button className="slotButtons">.
-                      </button>
+                    <Link to="/get-an-appointment" target="_blank" onClick={() => updateWhen(date,hour)}>
+                      <button className="slotButtons">.</button>
                     </Link>
                   </td>;
                 }
