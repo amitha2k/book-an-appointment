@@ -8,7 +8,7 @@ import GlobalContext from './GlobalContext';
 function Calendar() {
   //Today's Date:
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const { dateVar, setDateVar, timeVar, setTimeVar } = useContext(GlobalContext);
+  const { dateVar, setDateVar, timeVar, setTimeVar, yearVar, setYearVar, monthVar, setMonthVar } = useContext(GlobalContext);
 
   // useEffect(() => {
   //   setSelectedDate(dateVar);
@@ -78,17 +78,26 @@ function Calendar() {
 
   const updateWhen = (d,h) => {
     setDateVar(d.getDate());
+    setMonthVar(d.getMonth());
+    setYearVar(d.getFullYear());
     setTimeVar(h);
   }
 
-  // const dateTimeInfo = () => {
-  //   const d = date;
-  //   const t = hour;
-  //   return [d,t];
-  // }
-  // const [dateOfApp, timeOfApp] = dateTimeInfo();
+
+  const [modal, setModal] = useState(false);
+
+  const toggleModal = () => {
+    setModal(!modal);
+  };
+
+  if(modal) {
+    document.body.classList.add('active-modal')
+  } else {
+    document.body.classList.remove('active-modal')
+  }
 
   return (
+    <>
     <div className="calendar-container">
       <h1 className="header">Week of {currentWeekStart.getDate()} {monthName(currentWeekStart.getMonth())} {currentWeekStart.getFullYear()}</h1>
       {/* <h2>{dateVar} {timeVar}</h2> */}
@@ -117,9 +126,14 @@ function Calendar() {
                 currentDate.getDate()+13-currentDate.getDay())
                 if (date >= currentDate && date <= maxLimit) {
                   return <td key={`${date}-${hour}`}>
-                    <Link to="/get-an-appointment" target="_blank" onClick={() => updateWhen(date,hour)}>
-                      <button className="slotButtons">.</button>
-                    </Link>
+                    {/* <Link to="/get-an-appointment" onClick={toggleModal}> */}
+                      <button 
+                      className="slotButtons"
+                      onClick={() => {
+                        updateWhen(date, hour);
+                        toggleModal();
+                        }}>.</button>
+                    {/* </Link> */}
                   </td>;
                 }
                 return <td key={`${date}-${hour}`} className="inactive">unavailable</td>;
@@ -129,6 +143,63 @@ function Calendar() {
         </tbody>
       </table>
     </div>
+    {modal && (
+        <div className="modal">
+          <div onClick={toggleModal} className="overlay"></div>
+          <div className="modal-content">
+            <h2>Book an Appointment</h2>
+            <form>
+              <input type="text" name="name" id="name" placeholder="Name"></input>
+              <br></br><br></br>
+              <input type="email" name="email" id="email" placeholder="School e-mail"></input>
+              <br></br><br></br>
+              <label for="course">Course: </label>
+              <select name="course" id="course">
+              <option>Select a Course</option>
+              <option>MATH 135</option>
+              <option>MATH 136</option>
+              <option>MATH 137</option>
+              <option>MATH 138</option>
+              <option>MATH 235</option>
+              <option>MATH 237</option>
+              <option>MATH 239</option>
+              <option>CS 115</option>
+              <option>CS 116</option>
+              <option>CO 250</option>
+              <option>STAT 230</option>
+              <option>Other</option>
+              </select>
+              <br></br><br></br>
+              <label for="mode">Mode: </label>
+              <select name="mode" id="mode">
+                <option> in-person</option>
+                <option> online (via Teams) </option>
+              </select>
+              <br></br><br></br>
+              <label for="date">Date: {dateVar} {monthName(monthVar)} {yearVar}</label>
+              <br></br><br></br>
+              <label for="time">Time: {timeVar} </label>
+              <br></br><br></br>
+              <label for="relatedFiles">Attach any relevant files here 
+              (eg: assignments, coursenotes or screenshots of the same)</label>
+              <br></br>
+              <input type="file" name="relatedFiles" id="relatedFiles"></input>
+              <br></br><br></br>
+              <label for="comments">Any Comments: </label>
+              <br></br>
+              <input type="text" name="comments" id="comments"></input>
+              <br></br><br></br>
+              <input type="submit" value="Book"></input>
+
+      </form>
+
+            <button className="close-modal" onClick={toggleModal}>
+              CLOSE
+            </button>
+          </div>
+        </div>
+      )}
+    </>
   );
 }
 
